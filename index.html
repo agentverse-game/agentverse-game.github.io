@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>AgentVerse – Chat with animated assistants</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="AgentVerse is a modern chat app inspired by Microsoft Agent. Chat with animated assistant characters and authentic SAPI 4 voices. Download or join in your browser." />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#ffffff" />
+
+	<meta property="og:title" content="AgentVerse" />
+	<meta property="og:description" content="Chat with animated assistant characters and classic SAPI 4 voices." />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="./img/readme/logo.png" />
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/favicons/manifest.json">
+	<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/favicons/favicon.ico">
+	<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+
+	<!-- Original stylesheet: blue desktop background, cream bubble (#content), Microsoft Sans Serif -->
+	<link rel="stylesheet" type="text/css" href="./css/readme.min.css">
+
+	<script src="./js/lib/jquery.min.js"></script>
+
+	<script src="./js/platform.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/platform.css">
+
+	<!-- Additions in the same classic style. Nothing here overrides readme.min.css. -->
+	<style>
+		.panel {
+			width: 75%;
+			max-width: 800px;
+			margin: 32px auto;
+			padding: 16px 32px;
+			background-color: rgba(255, 255, 225, 0.8);
+		}
+		@media (max-width: 700px) {
+			#content, .panel { width: auto; margin: 16px 12px; padding: 12px 16px; }
+		}
+
+		#content { text-align: center; }
+		#content .logo { max-width: 100%; height: auto; }
+		#content h1 { margin: 8px 0; font-size: 2.2em; }
+		#content .lead { text-align: left; }
+		.panel h2, #content h2 { margin: 0 0 8px; font-size: 1.4em; }
+		.panel p.sub { margin: 0 0 16px; }
+		#content p { line-height: 1.5; }
+
+		/* Classic beveled buttons */
+		.btn {
+			display: inline-block;
+			padding: 6px 18px;
+			font-size: 1rem;
+			color: #000;
+			text-decoration: none;
+			background: linear-gradient(#ffffff, #ece9d8);
+			border: 1px solid #003c74;
+			border-radius: 3px;
+			cursor: pointer;
+			box-shadow: inset 0 0 0 1px #fff;
+		}
+		.btn:hover { box-shadow: inset 0 0 0 2px #f8b330; }
+		.btn:active { background: linear-gradient(#ece9d8, #ffffff); }
+		.btn:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+		.btn-primary { font-weight: bold; padding: 10px 24px; font-size: 1.1rem; }
+		.cta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 16px 0 6px; }
+		#detected-os { display: block; font-size: .85em; color: #444; }
+
+		/* Feature list */
+		.features { list-style: none; margin: 0; padding: 0; }
+		.features li { padding: 8px 0; border-top: 1px dotted #b8b890; }
+		.features li:first-child { border-top: 0; }
+		.features strong { display: block; }
+
+		/* Download "windows" */
+		.dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+		.win {
+			background: #ece9d8;
+			border: 1px solid #0831d9;
+			border-radius: 8px 8px 0 0;
+			overflow: hidden;
+			box-shadow: 2px 2px 0 rgba(0, 0, 0, .25);
+		}
+		.win.recommended { box-shadow: 0 0 0 3px #f8b330, 2px 2px 0 rgba(0, 0, 0, .25); }
+		.win .titlebar {
+			background-color: rgba(109, 51, 160, 0.85);
+			color: #fff;
+			font-weight: bold;
+			padding: 4px 10px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.win .titlebar .tag { font-size: .75em; background: #f8b330; color: #000; padding: 0 6px; border-radius: 3px; }
+		.win .body { padding: 14px; text-align: center; }
+		.win .meta { margin: 0 0 12px; font-size: .9em; color: #333; }
+		.note { margin: 16px 0 0; font-size: .95em; }
+
+		/* Steps and code */
+		.steps { margin: 0; padding-left: 22px; }
+		.steps li { margin-bottom: 14px; }
+		.code {
+			display: block;
+			margin: 6px 0 0;
+			padding: 8px 10px;
+			background: #fff;
+			border: 1px inset #AAA;
+			overflow-x: auto;
+			white-space: pre;
+			font-family: "Courier New", monospace !important;
+			font-size: .95em;
+			color: #000;
+		}
+
+		/* FAQ */
+		details { margin-bottom: 8px; background: #fff; border: 1px inset #AAA; padding: 8px 12px; }
+		summary { cursor: pointer; font-weight: bold; }
+		details p { margin: 8px 0 0; }
+
+		footer.panel { text-align: center; font-size: .9em; }
+		footer .links { margin-bottom: 8px; }
+		footer .links a { margin: 0 8px; }
+		a { color: #0000ee; }
+		a:visited { color: #551a8b; }
+		.btn, .btn:visited { color: #000; }
+	</style>
+</head>
+<body>
+
+	<div id="content">
+		<img class="logo" src="./img/readme/logo.png" alt="AgentVerse logo.">
+		<h2 id="what-is-this">What is this?</h2>
+		<p class="lead">AgentVerse is a modern chat application inspired by the classic Microsoft Agent software. Built with <strong>Node.js</strong> and <strong>Socket.IO</strong>, it lets you chat using Microsoft's iconic animated assistant characters with authentic SAPI 4 voices by Lernout &amp; Hauspie.</p>
+		<p class="lead">The project originally began as <strong>BonziWORLD Revived (BWR)</strong>, but has since grown into its own independent project with many new features, characters, and improvements. Today, AgentVerse is developed separately and is not affiliated with BonziWORLD or any BonziWORLD-related communities.</p>
+
+		<div class="cta">
+			<a class="btn btn-primary" id="hero-download" href="#download">Download AgentVerse</a>
+		</div>
+		<span id="detected-os">Free to use.</span>
+	</div>
+
+	<div class="panel xp_bubble" id="features">
+		<h2>Features</h2>
+		<p class="sub">A real-time chat room where the characters are the star.</p>
+		<ul class="features">
+			<li><strong>Animated characters</strong>Pick an assistant, give them a name and chat as them.</li>
+			<li><strong>Authentic SAPI 4 voices</strong>Messages are spoken aloud with the classic Lernout &amp; Hauspie voices. SAPI 4 text-to-speech is generated with <a href="https://github.com/TETYYS/SAPI4" target="_blank" rel="noopener">TETYYS/SAPI4</a>.</li>
+			<li><strong>Real-time rooms</strong>Powered by Socket.IO, so everyone in the room sees and hears the same thing.</li>
+			<li><strong>Always growing</strong>Started as BonziWORLD Revived, now its own project with new features, characters and improvements.</li>
+			<li><strong>Run it your way</strong>Use it in your browser, download it, or host your own server on Node.js.</li>
+		</ul>
+	</div>
+
+	<div class="panel xp_bubble" id="download">
+		<h2>Download AgentVerse</h2>
+		<p class="sub">Choose your platform. The one that matches your computer is highlighted.</p>
+		<div class="dl-grid">
+			<div class="win" data-os="windows">
+				<div class="titlebar"><span>Windows</span><span class="tag" hidden>Recommended</span></div>
+				<div class="body">
+					<p class="meta">Windows 10 or later</p>
+					<a class="btn btn-primary" data-link="windows" href="#">Download</a>
+				</div>
+			</div>
+		</div>
+		<p class="note">
+			<i>Steam is required to run this application.</i><br>
+		</p>
+	</div>
+
+	<div class="panel xp_bubble" id="faq">
+		<h2>Questions</h2>
+		<details>
+			<summary>What is AgentVerse?</summary>
+			<p>A modern chat application inspired by the classic Microsoft Agent software. You chat as an animated assistant character, with authentic SAPI 4 voices by Lernout &amp; Hauspie.</p>
+		</details>
+		<details>
+			<summary>Is this the same app as BonziWORLD?</summary>
+			<p>No. The project began as BonziWORLD Revived (BWR) but has grown into its own independent project. AgentVerse is developed separately and is not affiliated with BonziWORLD or any BonziWORLD-related communities.</p>
+		</details>
+		<details>
+			<summary>Do I need to install anything?</summary>
+			<p>Yup. You can download the Electron app for your system.</p>
+		</details>
+		<details>
+			<summary>Is it affiliated with Microsoft?</summary>
+			<p>No. AgentVerse is an independent fan project inspired by Microsoft Agent. Microsoft and Microsoft Agent are trademarks of Microsoft Corporation.</p>
+		</details>
+	</div>
+
+	<footer class="panel xp_bubble">
+		<div class="links">We use <a href="https://github.com/TETYYS/SAPI4" target="_blank" rel="noopener">TETYYS's SAPI4</a> for SAPI4 TTS generation.</div>
+		AgentVerse is an independent project and is not affiliated with Microsoft, BonziWORLD or any BonziWORLD-related communities.
+	</footer>
+
+<script>
+	// ===== EDIT THESE: point each key at the real URL. =====
+	var LINKS = {
+		web:       "/",            // the web chat client
+		windows:   "/downloads/AgentVerse_client.msi",            // e.g. "/downloads/AgentVerse-Setup.exe"
+		mac:       "#",            // e.g. "/downloads/AgentVerse.dmg"
+		linux:     "#",            // e.g. "/downloads/AgentVerse.AppImage"
+		releases:  "#",            // releases / changelog page
+		source:    "#",            // repository URL
+		community: "#"             // Discord / forum / etc.
+	};
+
+	document.querySelectorAll("[data-link]").forEach(function (el) {
+		var url = LINKS[el.getAttribute("data-link")];
+		if (url && url !== "#") { el.setAttribute("href", url); }
+	});
+	document.querySelectorAll("[data-fill=source]").forEach(function (el) {
+		if (LINKS.source && LINKS.source !== "#") { el.textContent = LINKS.source; }
+	});
+
+	// Detect the visitor's OS and highlight the matching download
+	(function () {
+		var ua = navigator.userAgent || "";
+		var os = /Windows/i.test(ua) ? "windows"
+			: /Mac OS X|Macintosh/i.test(ua) && !/iPhone|iPad/i.test(ua) ? "mac"
+			: /Linux/i.test(ua) && !/Android/i.test(ua) ? "linux"
+			: null;
+		if (!os) { return; }
+
+		var names = { windows: "Windows", mac: "macOS", linux: "Linux" };
+		var win = document.querySelector('.win[data-os="' + os + '"]');
+		if (win) {
+			win.classList.add("recommended");
+			win.querySelector(".tag").hidden = false;
+		}
+		var hero = document.getElementById("hero-download");
+		hero.textContent = "Download for " + names[os];
+		var url = LINKS[os];
+		if (url && url !== "#") { hero.setAttribute("href", url); }
+		document.getElementById("detected-os").textContent = "Free to use · Detected " + names[os];
+	})();
+</script>
+</body>
+</html>
